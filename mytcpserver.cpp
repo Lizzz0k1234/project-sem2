@@ -1,6 +1,5 @@
 #include "mytcpserver.h"
-#include <QDebug>
-#include <QCoreApplication>
+
 
 MyTcpServer::~MyTcpServer()
 {
@@ -8,6 +7,7 @@ mTcpServer->close();
 //server_status=0;
 }
 MyTcpServer::MyTcpServer(QObject *parent) : QObject(parent){
+    Db::getInstance();
 mTcpServer = new QTcpServer(this);
 connect(mTcpServer, &QTcpServer::newConnection,
 this, &MyTcpServer::slotNewConnection);
@@ -33,6 +33,7 @@ connect(tempSocket,&QTcpSocket::disconnected,this,&MyTcpServer::slotClientDiscon
 
 void MyTcpServer::slotServerRead(){
 QTcpSocket* tempSock=(QTcpSocket*)sender();
+
 QString res="";
 while(tempSock->bytesAvailable()>0)
 {
@@ -40,7 +41,7 @@ QByteArray array =tempSock->readAll();
 res.append(array);
 //mTcpSocket->write(array);
 }
-tempSock->write(res.toUtf8());
+tempSock->write(parsing(res));
 }
 
 void MyTcpServer::slotClientDisconnected(){

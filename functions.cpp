@@ -1,5 +1,5 @@
 #include "functions.h"
-#include <QStringList>
+
 QByteArray parsing(QString data_from_client){
     /* data_from_client = NameOfFunc&Param1&Param2&Param3
     * Цель парсинга:
@@ -21,11 +21,14 @@ QByteArray parsing(QString data_from_client){
 
 
 }
-QByteArray auth(QString log, QString pass){
-return "auth done\n";
+
+QByteArray auth(QString log, QString pass)
+{
+return Db::Test1();
 }
 
-QByteArray reg(QString log, QString pass, QString mail){
+QByteArray reg(QString log, QString pass, QString mail)
+{
 return "reg done\n";
 }
 

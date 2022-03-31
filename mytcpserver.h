@@ -1,5 +1,9 @@
 #ifndef MYTCPSERVER_H
 #define MYTCPSERVER_H
+
+#include "functions.h"
+#include "db.h"
+
 #include <QObject>
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -7,6 +11,9 @@
 #include <QtNetwork>
 #include <QByteArray>
 #include <QDebug>
+
+
+
 
 class MyTcpServer : public QObject
 {

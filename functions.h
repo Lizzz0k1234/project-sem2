@@ -1,6 +1,10 @@
 #ifndef FUNCTIONSFORSERVER_H
 #define FUNCTIONSFORSERVER_H
+
+#include "db.h"
+
 #include <QString>
+#include <QStringList>
 
 QByteArray parsing(QString data_from_client);
 
