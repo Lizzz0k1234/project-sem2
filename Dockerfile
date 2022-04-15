@@ -3,11 +3,11 @@ COPY . /usr/src/myapp
 WORKDIR /usr/src/myapp
 
 RUN apt update && \
-    apt upgrade && \
-    apt-get -y install qt5-default
+    DEBIAN_FRONTEND=noninteractive apt-get -y install qt5-default && \
+    apt -y install build-essential
 
-RUN qmake server.pro
+RUN qmake echoServer.pro
 RUN make
 
-ENTRYPOINT ["./server"]
+ENTRYPOINT ["./echoServer"]
 
