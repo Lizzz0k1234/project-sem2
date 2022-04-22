@@ -25,6 +25,7 @@ void FormTask::on_pushButton_send_clicked()
 {
     QString answer = ui -> lineEdit_answer -> text();
     chek_answer(answer, input_for_task, task_number);
+    //Client::send_to_server(answer);
     ui -> lineEdit_answer -> setText("");
     hide();
 }
@@ -33,5 +34,6 @@ void FormTask::on_pushButton_send_clicked()
 void FormTask::on_lineEdit_answer_returnPressed()
 {
     on_pushButton_send_clicked();
+
 }
 

@@ -32,8 +32,8 @@ class Db
         Db()
         {
             db = QSqlDatabase::addDatabase("QSQLITE");
-            QString path = "../";
-            db.setDatabaseName("Test");
+            QString path = "C:/Users/Pavel/Desktop/server4/project-sem2/server/";
+            db.setDatabaseName(path + "DataBase.db");
 
             if(!db.open())
                 qDebug()<<db.lastError().text();
@@ -54,6 +54,20 @@ class Db
         }
         static QByteArray Test1() {
                     return "1";
+                };
+        static QByteArray check_ans(QString ans) {
+                    if (ans=="+")
+                    {
+                        return "true";
+                    }
+                    return "false";
+                };
+        static QByteArray auth(QString log, QString pass) {
+                    if (log=="test" && pass == "test")
+                    {
+                        return "true";
+                    }
+                    return "false";
                 };
 };
 #endif

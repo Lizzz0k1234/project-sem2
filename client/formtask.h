@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "functionsforclient.h"
+#include "client.h"
 namespace Ui {
 class FormTask;
 }

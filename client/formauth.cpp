@@ -1,5 +1,6 @@
 #include "formauth.h"
 #include "ui_formauth.h"
+#include"client.h"
 #include <QMessageBox>
 FormAuth::FormAuth(QWidget *parent) :
     QWidget(parent),
@@ -8,6 +9,8 @@ FormAuth::FormAuth(QWidget *parent) :
     ui->setupUi(this);
     ui->lineEdit_email->setVisible(false);
     ui->pushButton_cancel->setVisible(false);
+    //Client::getInstance();
+    //connect (Client::getInstance(), &Client::inbox_msg, this, &FormAuth::on_inbox);
 }
 
 FormAuth::~FormAuth()
@@ -53,8 +56,22 @@ void FormAuth::check_auth()
     else
     {
         //auth
-        g = true;
-        auth(log,pass);
+        //g = true;
+        if (auth(log,pass)=="true"){
+            //auth(log,pass);
+           g=true;
+        }
+
+//        QMessageBox temp;
+//        temp.setText(auth(log,pass));
+//        temp.exec();
+        else{
+                    g=false;
+                    QMessageBox temp;
+                    temp.setText("Что-то пошло не так");
+                    temp.exec();
+        }
+
 
     }
 
@@ -103,6 +120,15 @@ void FormAuth::on_lineEdit_email_returnPressed()
 
 void FormAuth::on_lineEdit_log_returnPressed()
 {
+    on_pushButton_ok_clicked();
+}
+void FormAuth::on_inbox(QString msg)
+{
+    if(msg == "auth done")
+    {
+        emit logged_in(ui -> lineEdit_log -> text());
+        hide();
+    }
     on_pushButton_ok_clicked();
 }
 

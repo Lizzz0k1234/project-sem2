@@ -1,22 +1,23 @@
 #include "functionsforclient.h"
 
-void auth(QString log, QString pass)
+QString auth(QString log, QString pass)
 {
     QString res ="auth&"+log+"&"+pass;
-    qDebug()<<res;
-    //send_to_server(res);
+    //qDebug()<<Client::send_to_server(res);
+    return Client::send_to_server(res);
 }
-void reg(QString log, QString pass, QString email)
+QString reg(QString log, QString pass, QString email)
 {
     QString res ="reg&"+log+"&"+pass+"&"+email;
-    qDebug()<<res;
-    //send_to_server(res);
+    //qDebug()<<res;
+    return Client::send_to_server(res);
 }
+
 void update_stat(int n, QString upd)
 {
     QString res ="updstat&"+QString::number(n)+"&"+upd;
     qDebug()<<res;
-    //send_to_server(res);
+    Client::send_to_server(res);
 }
 bool chek_answer(QString answer, QString input_for_task, int task_number)
 {
@@ -30,6 +31,7 @@ bool chek_answer(QString answer, QString input_for_task, int task_number)
     update_stat(task_number,tmp);
     return res;
 }
+
 QString solve_task(int task_number, QString input_for_task)
 {
     return "ans"+QString::number(task_number);

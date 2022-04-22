@@ -41,7 +41,9 @@ QByteArray array =tempSock->readAll();
 res.append(array);
 //mTcpSocket->write(array);
 }
-tempSock->write(parsing(res));
+QByteArray array = parsing(res);
+qDebug()<<array;
+tempSock->write(array);
 }
 
 void MyTcpServer::slotClientDisconnected(){

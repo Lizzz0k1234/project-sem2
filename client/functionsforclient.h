@@ -1,10 +1,10 @@
 #ifndef FUNCTIONSFORCLIENT_H
 #define FUNCTIONSFORCLIENT_H
-
+#include "client.h"
 #include <QString>
 #include <QDebug>
-void auth(QString log, QString pass);
-void reg(QString log, QString pass, QString email);
+QString auth(QString log, QString pass);
+QString reg(QString log, QString pass, QString email);
 void update_stat(int n, QString upd);
 
 QString generate_input_for_task();
