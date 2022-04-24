@@ -42,14 +42,22 @@ void FormAuth::check_auth()
     {
         //reg
         QString email = ui -> lineEdit_email -> text();
-        if (email!="") reg(log, pass, email);
-        else
+        if ((email!="")&& (reg(log, pass, email)!="Данный пользователь зарегистрирован")) reg(log, pass, email);
+        //else if (reg(log, pass, email)=="AlreadyCreated") g=false;
+        else if (email=="")
         {
             QMessageBox temp;
-            temp.setText("Please, write your email");
+            temp.setText("Пожалуйста, укажите ваш email");
             temp.exec();
             g = false;
 
+        }
+        else
+        {
+            QMessageBox temp;
+            temp.setText("Данный пользователь уже зарегистрирован");
+            temp.exec();
+            g = false;
         }
     }
 
@@ -68,7 +76,7 @@ void FormAuth::check_auth()
         else{
                     g=false;
                     QMessageBox temp;
-                    temp.setText("Что-то пошло не так");
+                    temp.setText("Неправильный логин или пароль");
                     temp.exec();
         }
 
@@ -93,14 +101,14 @@ void FormAuth::on_pushButton_ok_clicked()
         else
         {
             QMessageBox temp;
-            temp.setText("Please, Fill in all the fields");
+            temp.setText("Пожалуйста, заполните все поля");
             temp.exec();
         }
     }
     else
     {
         QMessageBox temp;
-        temp.setText("Please, Fill in all the fields");
+        temp.setText("Пожалуйста, заполните все поля");
         temp.exec();
     }
 }

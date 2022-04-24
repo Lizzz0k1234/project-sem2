@@ -35,6 +35,7 @@ class Db
             QString path = "C:/Users/Pavel/Desktop/server4/project-sem2/server/";
             db.setDatabaseName(path + "DataBase.db");
 
+
             if(!db.open())
                 qDebug()<<db.lastError().text();
         }
@@ -55,20 +56,96 @@ class Db
         static QByteArray Test1() {
                     return "1";
                 };
-        static QByteArray check_ans(QString ans) {
+
+
+        static QString count_stat(QString login)
+        {
+
+            QByteArray result;
+            db.open();
+            QSqlQuery query;
+            query.prepare("SELECT stat FROM user WHERE log = :login");
+            query.bindValue(":login", login);
+            query.exec();
+            QSqlRecord rec = query.record();
+            const int statIndex = rec.indexOf("stat");
+
+            while(query.next()) result.append(query.value(statIndex).toString());
+            db.close();
+            query.clear();
+            //qDebug()<<result;
+            return result;
+        }
+
+
+        static QByteArray check_ans(QString ans, QString login) {
+
                     if (ans=="+")
                     {
+                        //if (login == "test") qDebug()<<"be";
+                        db.open();
+                        QSqlQuery query;
+                        query.prepare("UPDATE user SET stat=stat+1 WHERE log=:login");
+                        query.bindValue(":login", login);
+                        query.exec();
+                        db.close();
+                        query.clear();
                         return "true";
+
                     }
-                    return "false";
+                    else
+                    {
+                        db.open();
+                        QSqlQuery query;
+                        query.prepare("UPDATE user SET stat=stat-1 WHERE log=:login");
+                        query.bindValue(":login", login);
+                        query.exec();
+                        db.close();
+                        query.clear();
+                        return "false";
+                    }
                 };
         static QByteArray auth(QString log, QString pass) {
-                    if (log=="test" && pass == "test")
+                    /*if (log=="test" && pass == "test")
                     {
                         return "true";
                     }
-                    return "false";
+                    return "false";*/
+                        db.open();
+                        QSqlQuery query;
+                        query.prepare("SELECT * FROM user where log = :login and password = :password" );
+                        query.bindValue(":login", log);
+                        query.bindValue(":password", pass);
+                        query.exec();
+                        if (query.next()){
+                            qDebug()<<log;
+                            return "true";
+                        }
+                        else{
+                            return "false";
+                        }
                 };
+        static QByteArray reg(QString log, QString pass, QString mail)
+        {
+                        db.open();
+                        QSqlQuery query;
+                        query.prepare("SELECT * FROM user where log = :login" );
+                        query.bindValue(":login", log);
+                        query.exec();
+                        if (query.next()){
+                            return "Данный пользователь зарегистрирован";
+                        }
+                        else{
+                            qDebug()<<log;
+                            query.prepare("INSERT INTO user (log, password, email, stat) VALUES (:login, :password, :email, 0)" );
+                            query.bindValue(":login", log);
+                            query.bindValue(":password", pass);
+                            query.bindValue(":email", mail);
+                            query.exec();
+                            return "true";
+                        }
+                        //return "Smth went wrong...";
+        }
 };
 #endif
 

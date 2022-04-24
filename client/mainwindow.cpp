@@ -24,7 +24,9 @@ void MainWindow::slot_show(QString log)
 {
     ui -> label -> setText(log);
     show();
+
 }
+
 
 
 
@@ -70,8 +72,10 @@ void MainWindow::on_pushButton_exit_clicked()
 
 void MainWindow::on_pushButton_stat_clicked()
 {
+    QString log = ui -> label->text();
     QMessageBox temp;
-    temp.setText("srfwrsfvrsf");
+    temp.setText("Набранное количество баллов: " + look_stat(log));
     temp.exec();
+
 }
 

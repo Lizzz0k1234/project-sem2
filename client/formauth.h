@@ -29,7 +29,6 @@ private slots:
 
     void on_lineEdit_log_returnPressed();
     void on_inbox(QString msg);
-
 signals:
     void logged_in(QString log);
 private:

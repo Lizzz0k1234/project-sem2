@@ -3,6 +3,7 @@
 
 #include "formauth.h"
 #include "formtask.h"
+#include "functionsforclient.h"
 #include "client.h"
 #include <QMainWindow>
 #include <QMessageBox>
@@ -32,5 +33,6 @@ private slots:
     void on_actionTask_3_triggered();
     void on_pushButton_exit_clicked();
     void on_pushButton_stat_clicked();
+
 };
 #endif // MAINWINDOW_H

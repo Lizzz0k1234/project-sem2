@@ -7,8 +7,9 @@
 #include <QStringList>
 
 QByteArray parsing(QString data_from_client);
-
+inline static QString login;
 QByteArray auth(QString login, QString pass);
 QByteArray reg(QString login, QString pass, QString mail);
-QByteArray check_ans(QString ans);
+QByteArray check_ans(QString ans, QString login);
+QByteArray look_stat(QString res);
 #endif // FUNCTIONSFORSERVER_H

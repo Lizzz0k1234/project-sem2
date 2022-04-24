@@ -1,4 +1,5 @@
 #include "functionsforclient.h"
+#include "formauth.h"
 
 QString auth(QString log, QString pass)
 {
@@ -12,9 +13,15 @@ QString reg(QString log, QString pass, QString email)
     //qDebug()<<res;
     return Client::send_to_server(res);
 }
-
+QString look_stat(QString log)
+{
+    QString res ="stat&"+log;
+    //qDebug()<<res;
+    return Client::send_to_server(res);
+}
 void update_stat(int n, QString upd)
 {
+    //QString log = Ui::FormAuth *ui -> lineEdit_log -> text();
     QString res ="updstat&"+QString::number(n)+"&"+upd;
     qDebug()<<res;
     Client::send_to_server(res);

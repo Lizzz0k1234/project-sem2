@@ -6,7 +6,7 @@
 QString auth(QString log, QString pass);
 QString reg(QString log, QString pass, QString email);
 void update_stat(int n, QString upd);
-
+QString look_stat(QString log);
 QString generate_input_for_task();
 QString generate_text_task(int task_number, QString input_for_task);
 QString solve_task(int task_number, QString input_for_task);
