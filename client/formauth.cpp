@@ -37,13 +37,16 @@ void FormAuth::check_auth()
 {
     QString log = ui -> lineEdit_log -> text();
     QString pass = ui -> lineEdit_pass -> text();
+    //login=log;
     bool g = true;
     if (ui -> lineEdit_email -> isVisible())
     {
         //reg
         QString email = ui -> lineEdit_email -> text();
-        if ((email!="")&& (reg(log, pass, email)!="Данный пользователь зарегистрирован")) reg(log, pass, email);
-        //else if (reg(log, pass, email)=="AlreadyCreated") g=false;
+        if ((email!="")&& (reg(log, pass, email)!="Данный пользователь зарегистрирован"))
+        {
+            reg(log, pass, email);
+        }
         else if (email=="")
         {
             QMessageBox temp;
@@ -64,15 +67,10 @@ void FormAuth::check_auth()
     else
     {
         //auth
-        //g = true;
         if (auth(log,pass)=="true"){
-            //auth(log,pass);
            g=true;
-        }
 
-//        QMessageBox temp;
-//        temp.setText(auth(log,pass));
-//        temp.exec();
+        }
         else{
                     g=false;
                     QMessageBox temp;
@@ -139,4 +137,3 @@ void FormAuth::on_inbox(QString msg)
     }
     on_pushButton_ok_clicked();
 }
-

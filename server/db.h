@@ -58,18 +58,17 @@ class Db
                 };
 
 
-        static QString count_stat(QString login)
+        static QString count_stat(int sock_desc)
         {
 
             QByteArray result;
             db.open();
             QSqlQuery query;
-            query.prepare("SELECT stat FROM user WHERE log = :login");
-            query.bindValue(":login", login);
+            query.prepare("SELECT stat FROM user WHERE status=:sock_desc");
+            query.bindValue(":sock_desc", sock_desc);
             query.exec();
             QSqlRecord rec = query.record();
             const int statIndex = rec.indexOf("stat");
-
             while(query.next()) result.append(query.value(statIndex).toString());
             db.close();
             query.clear();
@@ -78,15 +77,14 @@ class Db
         }
 
 
-        static QByteArray check_ans(QString ans, QString login) {
+        static QByteArray check_ans(QString ans, int sock_desc) {
 
                     if (ans=="+")
                     {
-                        //if (login == "test") qDebug()<<"be";
                         db.open();
                         QSqlQuery query;
-                        query.prepare("UPDATE user SET stat=stat+1 WHERE log=:login");
-                        query.bindValue(":login", login);
+                        query.prepare("UPDATE user SET stat=stat+1 WHERE status=:sock_desc");
+                        query.bindValue(":sock_desc", sock_desc);
                         query.exec();
                         db.close();
                         query.clear();
@@ -97,8 +95,8 @@ class Db
                     {
                         db.open();
                         QSqlQuery query;
-                        query.prepare("UPDATE user SET stat=stat-1 WHERE log=:login");
-                        query.bindValue(":login", login);
+                        query.prepare("UPDATE user SET stat=stat-1 WHERE status=:sock_desc");
+                        query.bindValue(":sock_desc", sock_desc);
                         query.exec();
                         db.close();
                         query.clear();
@@ -106,11 +104,6 @@ class Db
                     }
                 };
         static QByteArray auth(QString log, QString pass) {
-                    /*if (log=="test" && pass == "test")
-                    {
-                        return "true";
-                    }
-                    return "false";*/
                         db.open();
                         QSqlQuery query;
                         query.prepare("SELECT * FROM user where log = :login and password = :password" );
@@ -119,13 +112,14 @@ class Db
                         query.exec();
                         if (query.next()){
                             qDebug()<<log;
+
                             return "true";
                         }
                         else{
                             return "false";
                         }
                 };
-        static QByteArray reg(QString log, QString pass, QString mail)
+        static QByteArray reg(QString log, QString pass, QString mail, int sock_desc)
         {
                         db.open();
                         QSqlQuery query;
@@ -137,14 +131,26 @@ class Db
                         }
                         else{
                             qDebug()<<log;
-                            query.prepare("INSERT INTO user (log, password, email, stat) VALUES (:login, :password, :email, 0)" );
+                            query.prepare("INSERT INTO user (log, password, email, stat, status) VALUES (:login, :password, :email, 0, :sock_desc)");
                             query.bindValue(":login", log);
                             query.bindValue(":password", pass);
                             query.bindValue(":email", mail);
+                            query.bindValue(":sock_desc", sock_desc);
                             query.exec();
                             return "true";
                         }
-                        //return "Smth went wrong...";
+        }
+        static QByteArray change_status(QString log, int sock_desc)
+        {
+            db.open();
+            QSqlQuery query;
+            query.prepare("UPDATE user SET status=:sock_desc WHERE log=:login");
+            query.bindValue(":sock_desc", sock_desc);
+            query.bindValue(":login", log);
+            query.exec();
+            db.close();
+            query.clear();
+            return "true";
         }
 };
 #endif

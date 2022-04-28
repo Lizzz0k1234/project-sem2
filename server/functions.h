@@ -6,10 +6,11 @@
 #include <QString>
 #include <QStringList>
 
-QByteArray parsing(QString data_from_client);
-inline static QString login;
+QByteArray parsing(QString data_from_client, int sock_desc);
+//inline static QString login;
 QByteArray auth(QString login, QString pass);
-QByteArray reg(QString login, QString pass, QString mail);
-QByteArray check_ans(QString ans, QString login);
-QByteArray look_stat(QString res);
+QByteArray reg(QString login, QString pass, QString mail, int sock_desc);
+QByteArray check_ans(QString ans, int sock_desc);
+QByteArray look_stat(int sock_desc);
+QByteArray change_sock_desc(QString login, int sock_desc);
 #endif // FUNCTIONSFORSERVER_H

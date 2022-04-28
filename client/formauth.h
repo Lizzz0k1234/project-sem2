@@ -16,6 +16,7 @@ public:
     explicit FormAuth(QWidget *parent = nullptr);
     ~FormAuth();
 
+
 private slots:
     void on_pushButton_reg_clicked();
 
@@ -33,6 +34,7 @@ signals:
     void logged_in(QString log);
 private:
     Ui::FormAuth *ui;
+
 };
 
 #endif // FORMAUTH_H
