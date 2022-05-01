@@ -19,6 +19,25 @@ QString look_stat(QString log)
     //qDebug()<<res;
     return Client::send_to_server(res);
 }
+
+QString look_stat1(QString log)
+{
+    QString res ="stat1&"+log;
+    //qDebug()<<res;
+    return Client::send_to_server(res);
+}
+QString look_stat2(QString log)
+{
+    QString res ="stat2&"+log;
+    //qDebug()<<res;
+    return Client::send_to_server(res);
+}
+QString look_stat3(QString log)
+{
+    QString res ="stat3&"+log;
+    //qDebug()<<res;
+    return Client::send_to_server(res);
+}
 void update_stat(int n, QString upd)
 {
     //QString log = Ui::FormAuth *ui -> lineEdit_log -> text();

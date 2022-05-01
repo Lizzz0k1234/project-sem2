@@ -76,16 +76,76 @@ class Db
             return result;
         }
 
+        static QString count_stat1(int sock_desc)
+        {
 
-        static QByteArray check_ans(QString ans, int sock_desc) {
+            QByteArray result;
+            db.open();
+            QSqlQuery query;
+            query.prepare("SELECT stat1 FROM user WHERE status=:sock_desc");
+            query.bindValue(":sock_desc", sock_desc);
+            query.exec();
+            QSqlRecord rec = query.record();
+            const int statIndex = rec.indexOf("stat1");
+            while(query.next()) result.append(query.value(statIndex).toString());
+            db.close();
+            query.clear();
+            //qDebug()<<result;
+            return result;
+        }
+
+        static QString count_stat2(int sock_desc)
+        {
+
+            QByteArray result;
+            db.open();
+            QSqlQuery query;
+            query.prepare("SELECT stat2 FROM user WHERE status=:sock_desc");
+            query.bindValue(":sock_desc", sock_desc);
+            query.exec();
+            QSqlRecord rec = query.record();
+            const int statIndex = rec.indexOf("stat2");
+            while(query.next()) result.append(query.value(statIndex).toString());
+            db.close();
+            query.clear();
+            //qDebug()<<result;
+            return result;
+        }
+
+        static QString count_stat3(int sock_desc)
+        {
+
+            QByteArray result;
+            db.open();
+            QSqlQuery query;
+            query.prepare("SELECT stat3 FROM user WHERE status=:sock_desc");
+            query.bindValue(":sock_desc", sock_desc);
+            query.exec();
+            QSqlRecord rec = query.record();
+            const int statIndex = rec.indexOf("stat3");
+            while(query.next()) result.append(query.value(statIndex).toString());
+            db.close();
+            query.clear();
+            //qDebug()<<result;
+            return result;
+        }
+
+
+
+
+
+        static QByteArray check_ans(QString numb, QString ans, int sock_desc) {
 
                     if (ans=="+")
                     {
                         db.open();
                         QSqlQuery query;
-                        query.prepare("UPDATE user SET stat=stat+1 WHERE status=:sock_desc");
+                        if (numb=="1") query.prepare("UPDATE user SET stat1=stat1+1, stat=stat+1 WHERE status=:sock_desc;");
+                        else if (numb=="2") query.prepare("UPDATE user SET stat2=stat2+1, stat=stat+1 WHERE status=:sock_desc");
+                        else query.prepare("UPDATE user SET stat3=stat3+1, stat=stat+1 WHERE status=:sock_desc");
                         query.bindValue(":sock_desc", sock_desc);
                         query.exec();
+
                         db.close();
                         query.clear();
                         return "true";
@@ -95,7 +155,9 @@ class Db
                     {
                         db.open();
                         QSqlQuery query;
-                        query.prepare("UPDATE user SET stat=stat-1 WHERE status=:sock_desc");
+                        if (numb=='1') query.prepare("UPDATE user SET stat1=stat1-1, stat=stat-1 WHERE status=:sock_desc;");
+                        else if (numb=='2') query.prepare("UPDATE user SET stat2=stat2-1, stat=stat-1 WHERE status=:sock_desc;");
+                        else query.prepare("UPDATE user SET stat3=stat3-1, stat=stat-1 WHERE status=:sock_desc;");
                         query.bindValue(":sock_desc", sock_desc);
                         query.exec();
                         db.close();
@@ -131,7 +193,7 @@ class Db
                         }
                         else{
                             qDebug()<<log;
-                            query.prepare("INSERT INTO user (log, password, email, stat, status) VALUES (:login, :password, :email, 0, :sock_desc)");
+                            query.prepare("INSERT INTO user (log, password, email, stat, status, stat1, stat2, stat3) VALUES (:login, :password, :email, 0, :sock_desc, 0, 0, 0)");
                             query.bindValue(":login", log);
                             query.bindValue(":password", pass);
                             query.bindValue(":email", mail);

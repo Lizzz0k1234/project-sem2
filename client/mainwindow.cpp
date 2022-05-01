@@ -74,7 +74,7 @@ void MainWindow::on_pushButton_stat_clicked()
 {
     QString log = ui -> label->text();
     QMessageBox temp;
-    temp.setText("Набранное количество баллов: " + look_stat(log));
+    temp.setText("Общее количество баллов: " + look_stat(log) + "   Баллы за 1 задание: " + look_stat1(log) + "   Баллы за 2 задание: " + look_stat2(log) + "   Баллы за 3 задание: " + look_stat3(log) );
     temp.exec();
 
 }
