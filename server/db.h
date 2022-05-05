@@ -214,6 +214,19 @@ class Db
             query.clear();
             return "true";
         }
+        static QByteArray del_status(int sock_desc)
+        {
+            db.open();
+            QSqlQuery query;
+            query.prepare("UPDATE user SET status=0 WHERE status=:sock_desc");
+            query.bindValue(":sock_desc", sock_desc);
+            //query.bindValue(":login", log);
+            query.exec();
+            db.close();
+            query.clear();
+            return "true";
+
+        }
 };
 #endif
 

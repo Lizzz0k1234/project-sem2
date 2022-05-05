@@ -66,6 +66,8 @@ void MainWindow::on_actionTask_3_triggered()
 
 void MainWindow::on_pushButton_exit_clicked()
 {
+    QString log = ui -> label->text();
+    del_status(log);
     close();
 }
 

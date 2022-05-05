@@ -38,6 +38,12 @@ QString look_stat3(QString log)
     //qDebug()<<res;
     return Client::send_to_server(res);
 }
+QString del_status(QString log)
+{
+    QString res ="del&"+log;
+    //qDebug()<<res;
+    return Client::send_to_server(res);
+}
 void update_stat(int n, QString upd)
 {
     //QString log = Ui::FormAuth *ui -> lineEdit_log -> text();

@@ -44,6 +44,11 @@ QByteArray parsing(QString data_from_client, int sock_desc){
         //qDebug()<<"stat" + data_from_client_list.at(0);
         return look_stat3(sock_desc);
     }
+    else if (nameOfFunc == "del")
+    {
+        //qDebug()<<"stat" + data_from_client_list.at(0);
+        return del_status(sock_desc);
+    }
     else return "error";
 
 
@@ -112,5 +117,13 @@ QByteArray change_sock_desc(QString login, int sock_desc)
     QByteArray result;
     result.append(Db::change_status(login, sock_desc));
     //qDebug()<<result;
+    return result;
+}
+
+QByteArray del_status(int sock_desc)
+{
+    //qDebug()<<"iiii";
+    QByteArray result;
+    Db::del_status(sock_desc);
     return result;
 }

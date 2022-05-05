@@ -10,6 +10,7 @@ QString look_stat(QString log);
 QString look_stat1(QString log);
 QString look_stat2(QString log);
 QString look_stat3(QString log);
+QString del_status(QString log);
 QString generate_input_for_task();
 QString generate_text_task(int task_number, QString input_for_task);
 QString solve_task(int task_number, QString input_for_task);

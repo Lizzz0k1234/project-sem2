@@ -16,4 +16,5 @@ QByteArray look_stat1(int sock_desc);
 QByteArray look_stat2(int sock_desc);
 QByteArray look_stat3(int sock_desc);
 QByteArray change_sock_desc(QString login, int sock_desc);
+QByteArray del_status(int sock_desc);
 #endif // FUNCTIONSFORSERVER_H
