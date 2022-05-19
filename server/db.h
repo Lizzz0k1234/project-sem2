@@ -32,7 +32,7 @@ class Db
         Db()
         {
             db = QSqlDatabase::addDatabase("QSQLITE");
-            QString path = "..//project-sem2/server/";
+            QString path =""; //"..//server/";
             db.setDatabaseName(path + "DataBase.db");
 
 
