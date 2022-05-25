@@ -16,7 +16,7 @@ FormTask::~FormTask()
 void FormTask::set_task_number(int n)
 {
     task_number = n;
-    input_for_task=generate_input_for_task();
+    input_for_task=generate_input_for_task(n);
     ui->textBrowser_task->setText(generate_text_task(task_number,input_for_task));
 
 }

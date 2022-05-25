@@ -11,9 +11,9 @@ QString look_stat1(QString log);
 QString look_stat2(QString log);
 QString look_stat3(QString log);
 QString del_status(QString log);
-QString generate_input_for_task();
+QString generate_input_for_task(int n);
 QString generate_text_task(int task_number, QString input_for_task);
 QString solve_task(int task_number, QString input_for_task);
 bool chek_answer(QString answer, QString input_for_task, int task_number);
-
+QString solve_task1(int task_number, QString input_for_task);
 #endif // FUNCTIONSFORCLIENT_H
