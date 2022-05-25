@@ -81,14 +81,13 @@ QString solve_task1(int task_number, QString input_for_task)
 
     for (int k=0;k<t.length();k++)
     {
-        if (t.at(k).digitValue()>n) n=t.at(k).digitValue();
+        if (t.at(k).digitValue()>n) n=t.at(k).digitValue();    //нахождение количества вершин
     }
     m=n;
-    double b[10][10];
+    double b[12][12];
 
     QRegExp rx(";");
     QStringList myStringList = t.split(rx);
-    QString h="";
 
     for (int i=1;i<n+1;i++)
         for (int j=1;j<m+1;j++)
@@ -99,7 +98,7 @@ QString solve_task1(int task_number, QString input_for_task)
             {
                 if(flag!=1)
                 {
-                    QString g=QString::number(i)+","+QString::number(j);
+                    QString g=QString::number(i)+","+QString::number(j);                     //создание матрицы смежности
                     QString p=QString::number(j)+","+QString::number(i);
                     if (g==myStringList.at(index))
                     {
@@ -115,11 +114,11 @@ QString solve_task1(int task_number, QString input_for_task)
                         flag=1;
 
                     }
-
                     index++;
                 }
             }
         }
+
 
     for (int i=1;i<n+1;i++)
     {
@@ -127,34 +126,31 @@ QString solve_task1(int task_number, QString input_for_task)
         for (int j=1;j<m+1;j++)
         {
 
-          x+=b[i][j];
+          x+=b[i][j];                            //нахождение суммы одной строки
         }
-        //e=x;
-        //qDebug()<<e;
         for (int g=1;g<n+1;g++)
         {
-            if (i==g) b[i][g]=x;
-            else b[i][g]=-b[i][g];
+            if (i==g) b[i][g]=x;                 //вставка в диагональ значение суммы строки
+            else b[i][g]=-b[i][g];               //смена знака на противоположный
         }
 
     }
 
-    int q=0;
-    int l;
-    //qDebug()<<QString::number(b[1][1])+"bebe";
+    //удаление одной строки и столбца
     for (int i=1;i<n;i++)
          for (int j=1;j<m;j++)
         {
-             if (i==j) l+=b[i][j];
-                 b[i][j]=b[i+1][j+1];
-                 q+=b[i][j];
 
-         //w=QString::number(q);
+                 b[i][j]=b[i+1][j+1];
+                 //q+=b[i][j];
+
+
 
         }
-    qDebug()<<QString::number(b[1][1])+QString::number(b[2][2])+QString::number(b[3][3])+QString::number(b[4][4])+QString::number(b[5][5]);
+    //qDebug()<<QString::number(b[1][1])+QString::number(b[2][2])+QString::number(b[3][3])+QString::number(b[4][4])+QString::number(b[5][5]);
 
 
+    //Алгоритм
     double z=1;
     for (int i=1;i<n;i++)
     {
@@ -175,13 +171,9 @@ QString solve_task1(int task_number, QString input_for_task)
         }
 
     }
-    qDebug()<<QString::number(b[1][1])+QString::number(b[2][2])+QString::number(b[3][3])+QString::number(b[4][4])+QString::number(b[5][5]);
-    /*for (int i=1;i<n;i++)
-            for (int j=1;j<n;j++)
-            {
-                qDebug()<<b[i][j];
-            }*/
-    //qDebug()<<QString::number(b[6][6]);
+    //qDebug()<<QString::number(b[1][1])+QString::number(b[2][2])+QString::number(b[3][3])+QString::number(b[4][4])+QString::number(b[5][5]);
+
+    //перемножение диагонали
     for (int i=1;i<n;i++)
         for (int j=1;j<n;j++)
             if (i==j) z=z*b[i][j];
@@ -189,11 +181,12 @@ QString solve_task1(int task_number, QString input_for_task)
     //qDebug()<<z;
 
     w=QString::number(z);
-    //qDebug()<<w;
-    //qDebug()<<b[3][3];
+
 
     return w;
 }
+
+
 QString solve_task(int task_number, QString input_for_task)
 {
     QString w="";
@@ -210,13 +203,48 @@ QString solve_task(int task_number, QString input_for_task)
 }
 QString generate_input_for_task(int n)
 {
+
+    QStringList tasks={"1,2;1,4;1,5;1,6;2,3;2,5;3,4;3,6;4,5;5,6",
+                       "1,2;1,3;1,5;1,6;2,3;2,4;2,6;3,4;3,5;4,5;4,6;5,6",
+                       "1,4;1,5;1,6;1,7;2,4;2,7;3,4;3,5;3,6;3,7;4,7",
+                       "1,6;1,8;2,6;2,7;3,4;3,5;3,6;3,8;4,5;4,6;4,8;7,8",
+                       "1,2;1,3;1,4;1,6;2,3;3,4;3,6;4,5;4,6;5,6",
+                       "1,2;1,3;1,5;1,6;2,4;3,4;3,5;3,6;4,5;4,6;5,6",
+                       "1,2;1,4;1,5;1,6;2,3;2,4;2,8;3,8;5,6;6,7;6,8;7,8",
+                       "1,8;1,9;2,5;2,9;3,5;3,6;3,7;3,9;4,5;4,9;5,6;7,9;8,9",
+                       "1,4;1,5;1,6;1,7;2,4;2,7;3,4;3,7;4,5;6,7",
+                       "1,2;1,3;1,5;1,6;2,3;2,4;2,6;3,4;3,5;4,5;4,6;5,6",
+                       "1,2;1,3;1,4;1,5;2,4;2,6;2,7;3,4;4,5;5,6;5,7",
+                       "1,4;1,9;2,5;2,9;3,5;3,7;4,6;4,7;4,9;6,7;7,8;8,9",
+                       "1,2;1,3;1,6;1,7;2,3;2,5;2,6;3,4;3,7;4,7;5,6;6,7",
+                       "1,2;1,3;1,5;1,6;2,5;2,6;3,7;4,6;4,7;6,7",
+                       "1,2;1,3;1,5;1,7;2,6;3,4;3,6;3,7;4,5;4,6;4,7;6,7",
+                       "1,2;1,8;2,3;2,5;2,8;3,4;3,6;3,7;4,6;5,6;5,7;5,8;6,8",
+                       "1,2;1,3;1,5;1,8;2,3;2,4;2,6;2,7;2,8;3,4;3,7;4,5;4,6",
+                       "1,2;1,3;1,4;1,5;2,3;2,4;2,5;3,4;3,5;4,5",
+                       "1,4;1,5;1,6;1,7;2,4;2,5;2,6;2,7;3,4;3,5;3,6;3,7;4,8;5,8;6,8;7,8",
+                       "1,2;1,4;1,6;1,8;2,3;2,5;2,7;3,4;3,6;3,8;4,5;4,7;5,6;5,8;6,7;7,8",
+                       "1,5;1,6;1,7;1,9;2,4;2,5;2,6;2,7;3,4;3,5;3,6;3,9;4,8;5,8;4,9;6,8;7,8;7,9",
+                       "1,2;1,4;1,7;1,8;2,3;2,4;2,6;3,5;3,7;3,8;4,5;4,8;5,6;7,8",
+                       "1,2;1,4;1,5;1,6;2,3;2,4;2,7;3,4;3,5;3,7;4,5;4,6;4,7;5,6;6,7",
+                       "1,2;1,3;1,6;1,7;2,3;2,7;2,8;3,4;3,8;4,5;4,7;4,8;5,6;5,7;5,8",
+                       "1,7;1,8;2,4;2,6;2,8;2,9;3,6;3,8;4,8;5,6;5,7;6,8;6,9;7,8",
+                       "1,2;1,3;1,5;1,9;2,3;2,6;2,8;3,4;3,9;4,5;4,7;4,8;5,6;5,7;6,8;6,9;8,9",
+                       "1,2;1,6;2,3;2,4;2,7;3,6;4,5;4,9;4,11;5,7;6,8;6,10;7,9;7,11;8,9;9,10",
+                       "1,3;1,5;1,8;1,10;2,4;2,7;3,4;3,6;3,7;4,7;4,9;5,10;6,9;7,10;8,10",
+                       "1,2;1,3;1,4;1,5;2,3;2,4;2,5;3,4;3,5;4,5;4,6;4,7;5,6;5,7",
+                       "1,2;1,3;1,5;1,6;2,3;2,4;2,6;3,4;3,5;3,7;3,8;6,7;6,8"
+                      };
+
     QString t="";
-    QString a="";
     if (n==1)
     {
-        QRegExp rx(";");
-        t="1,2;1,4;1,5;1,6;2,3;2,5;3,4;3,6;4,5;5,6";
-        QStringList myStringList = t.split(rx);
+
+        //QRegExp rx(";");
+        int v = QRandomGenerator::global()->bounded(0, tasks.size());
+        t=tasks[v];
+        //t="1,2;1,4;1,5;1,6;2,3;2,5;3,4;3,6;4,5;5,6";
+        //QStringList myStringList = t.split(rx);
     }
 
     return t;
