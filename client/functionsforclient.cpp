@@ -182,10 +182,90 @@ QString solve_task1(int task_number, QString input_for_task)
 
     w=QString::number(z);
 
-
     return w;
 }
 
+QString weight(QString rebro)
+{
+    //rebro = "1,2"
+    int i = rebro.mid(0,rebro.indexOf(',')).toInt();
+    int j = rebro.mid(rebro.indexOf(','),-1).toInt();
+
+    return "0";
+}
+QString checkCircle(QString rbr, QStringList arcases)
+{
+    QString res = "";
+  QStringList carcases={"0,5,3"};
+  QStringList circle;
+  circle.push_back(rbr);
+  //qDebug()<<rbr;
+  QString start = rbr.mid(rbr.indexOf(',')+1,rbr.lastIndexOf(','));
+  QString finish = rbr.mid(rbr.lastIndexOf(',')+1,-1);
+  //qDebug()<<rbr.indexOf(',')+1;
+  auto it_elem = carcases.begin();
+  while (it_elem->indexOf(finish)<1)
+  {
+      it_elem ++;
+  }
+  if(it_elem->indexOf(finish)==it_elem->lastIndexOf(',')+1)
+  {
+      circle.push_back(it_elem->mid(0,it_elem->indexOf(','))+","+finish+it_elem->mid(it_elem->indexOf(','),it_elem->lastIndexOf(',')-1));
+      /*circle.push_back(finish);
+      circle.push_back(start);*/
+
+
+  }
+  else
+  {
+      circle.push_back(rbr.mid(0,rbr.indexOf(','))+","+start+","+finish);
+      /*circle.push_back(start);
+      circle.push_back(finish);*/
+
+  }
+  finish = circle.back().mid(circle.back().lastIndexOf(',')+1,-1);
+  qDebug()<<circle.back();
+  for (auto it=circle.begin();it!=circle.end();it++)
+  {
+      res+=*it +';';
+  }
+  qDebug()<<res;
+  return res;
+}
+
+QString solve_task3(int task_number, QString input_for_task)
+{
+    //QString task= input_for_task;
+    //input_for_task = "1,2;1,4;1,5;1,6;2,3;2,5;3,4;3,6;4,5;5,6";
+    QStringList all_rebra;// = input_for_task.split("\\s+"); //1 2 1 4 1 5 1 6 2 3 2 5 3 4 3 6 4 5 5 6
+    QStringList all_cycles = {};
+    QStringList carcases = {};
+    QStringList hords = {};
+    QRegExp rx(";");
+    all_rebra = input_for_task.split(rx);
+    /*for (int i=0;i<all_rebra.size();i++)
+    {
+        all_rebra[i] = weight(all_rebra[i])+ all_rebra[i];
+
+    }*/
+    all_rebra.sort();
+    QString circle = "";
+    QString rebro = "";
+
+    rebro= all_rebra.front();
+    all_rebra.pop_front();
+    circle = checkCircle(rebro, carcases);
+    if(circle.length()>0)
+    {
+        hords.push_back(rebro);
+        all_cycles.push_back(circle);
+    }
+    else
+    {
+        carcases.push_back(rebro);
+    }
+    return circle;
+}
 
 QString solve_task(int task_number, QString input_for_task)
 {
@@ -198,7 +278,7 @@ QString solve_task(int task_number, QString input_for_task)
     {
         w="ans"+QString::number(task_number);
     }
-    else w=w="ans"+QString::number(task_number);
+    else w=solve_task3(task_number, input_for_task);
     return w;
 }
 QString generate_input_for_task(int n)
@@ -245,6 +325,14 @@ QString generate_input_for_task(int n)
         t=tasks[v];
         //t="1,2;1,4;1,5;1,6;2,3;2,5;3,4;3,6;4,5;5,6";
         //QStringList myStringList = t.split(rx);
+    }
+    else if (n==2)
+    {
+
+    }
+    else
+    {
+        t="3,5,0;1,4,1;1,2,3;1,3,4;1,5,4;2,4,6;3,4,7;4,5,7;2,3,9;2,5,9";
     }
 
     return t;

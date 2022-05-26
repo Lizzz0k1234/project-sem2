@@ -16,4 +16,8 @@ QString generate_text_task(int task_number, QString input_for_task);
 QString solve_task(int task_number, QString input_for_task);
 bool chek_answer(QString answer, QString input_for_task, int task_number);
 QString solve_task1(int task_number, QString input_for_task);
+QString solve_task3(int task_number, QString input_for_task);
+QString checkCircle(QString rbr, QStringList arcases);
+QString weight(QString rebro);
+
 #endif // FUNCTIONSFORCLIENT_H
