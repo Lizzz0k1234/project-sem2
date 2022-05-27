@@ -78,10 +78,16 @@ QString solve_task1(int task_number, QString input_for_task)
     QString w="";
     QString t=input_for_task;
     int n=0,m=0;
-
-    for (int k=0;k<t.length();k++)
+    QStringList List = t.split(';');
+    //QStringList sList;
+    int first,second;
+    for (int i=0;i<List.size();i++)
     {
-        if (t.at(k).digitValue()>n) n=t.at(k).digitValue();    //нахождение количества вершин
+        QStringList sList=List.at(i).split(',');
+        first=sList.at(0).toInt();
+        second=sList.at(1).toInt();
+        if ((first>n)&&(first>second)) n=first;
+        if ((second>first)&&(second>n)) n=second;
     }
     m=n;
     double b[12][12];
