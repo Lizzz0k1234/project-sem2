@@ -1,5 +1,6 @@
 #include "functionsforclient.h"
 #include "formauth.h"
+#include <QWidget>
 #include <QMessageBox>
 QString auth(QString log, QString pass)
 {
@@ -327,6 +328,7 @@ QString generate_input_for_task(int n)
     {
 
         //QRegExp rx(";");
+        //int v=0;
         int v = QRandomGenerator::global()->bounded(0, tasks.size());
         t=tasks[v];
         //t="1,2;1,4;1,5;1,6;2,3;2,5;3,4;3,6;4,5;5,6";
