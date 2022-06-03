@@ -86,7 +86,7 @@
      <x>0</x>
      <y>0</y>
      <width>506</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMenu">
@@ -103,6 +103,10 @@
     <property name="title">
      <string>About</string>
     </property>
+    <addaction name="actionOur_project"/>
+    <addaction name="actionDevelopers"/>
+    <addaction name="separator"/>
+    <addaction name="actionOur_website"/>
    </widget>
    <addaction name="menuMenu"/>
    <addaction name="menuAbout"/>
@@ -126,6 +130,21 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionOur_project">
+   <property name="text">
+    <string>Our project</string>
+   </property>
+  </action>
+  <action name="actionDevelopers">
+   <property name="text">
+    <string>Developers</string>
+   </property>
+  </action>
+  <action name="actionOur_website">
+   <property name="text">
+    <string>Our website</string>
    </property>
   </action>
  </widget>

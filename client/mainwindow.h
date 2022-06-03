@@ -7,6 +7,7 @@
 #include "client.h"
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QDesktopServices>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -34,5 +35,9 @@ private slots:
     void on_pushButton_exit_clicked();
     void on_pushButton_stat_clicked();
 
+    void on_actionOur_project_triggered();
+    void on_actionExit_triggered();
+    void on_actionDevelopers_triggered();
+    void on_actionOur_website_triggered();
 };
 #endif // MAINWINDOW_H

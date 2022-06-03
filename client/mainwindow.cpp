@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -79,5 +78,34 @@ void MainWindow::on_pushButton_stat_clicked()
     temp.setText("Общее количество баллов: " + look_stat(log) + "   Баллы за 1 задание: " + look_stat1(log) + "   Баллы за 2 задание: " + look_stat2(log) + "   Баллы за 3 задание: " + look_stat3(log) );
     temp.exec();
 
+}
+
+
+void MainWindow::on_actionOur_project_triggered()
+{
+    QMessageBox temp;
+    temp.setText("Программа для решения задач по дискретной математике");
+    temp.exec();
+}
+
+
+void MainWindow::on_actionExit_triggered()
+{
+    on_pushButton_exit_clicked();
+}
+
+
+void MainWindow::on_actionDevelopers_triggered()
+{
+    QMessageBox temp;
+    temp.setText("Дьяконов Павел    Войтович Владислав    Кузьмич Елизавета");
+    temp.exec();
+}
+
+
+void MainWindow::on_actionOur_website_triggered()
+{
+    QUrl url("https://github.com/Lizzz0k1234/project-sem2/wiki");
+    QDesktopServices::openUrl(url);
 }
 

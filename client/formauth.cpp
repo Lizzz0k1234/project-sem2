@@ -41,29 +41,41 @@ void FormAuth::check_auth()
     bool g = true;
     if (ui -> lineEdit_email -> isVisible())
     {
-        //reg
-        QString email = ui -> lineEdit_email -> text();
-        if ((email!="")&& (reg(log, pass, email)!="Данный пользователь зарегистрирован"))
+        if ((pass.length()>=4)&&(pass.length()<=20))
         {
-            reg(log, pass, email);
-        }
-        else if (email=="")
-        {
-            QMessageBox temp;
-            temp.setText("Пожалуйста, укажите ваш email");
-            temp.exec();
-            g = false;
 
-        }
+            //reg
+            QString email = ui -> lineEdit_email -> text();
+                if ((email!="")&& (reg(log, pass, email)!="Данный пользователь зарегистрирован"))
+                {
+
+                    reg(log, pass, email);
+                }
+                else if (email=="")
+                {
+                    QMessageBox temp;
+                    temp.setText("Пожалуйста, укажите ваш email");
+                    temp.exec();
+                    g = false;
+
+                }
+                else
+                {
+                    QMessageBox temp;
+                    temp.setText("Данный пользователь уже зарегистрирован");
+                    temp.exec();
+                    g = false;
+                }
+            }
         else
         {
             QMessageBox temp;
-            temp.setText("Данный пользователь уже зарегистрирован");
+            temp.setText("Длина пароля должна быть больше 4 символов и не превышать 20");
             temp.exec();
             g = false;
         }
-    }
 
+    }
     else
     {
         //auth
