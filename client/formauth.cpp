@@ -7,6 +7,22 @@ FormAuth::FormAuth(QWidget *parent) :
     ui(new Ui::FormAuth)
 {
     ui->setupUi(this);
+    this->setStyleSheet("background: #9370db");
+
+
+    ui->lineEdit_pass->setStyleSheet("color: blue; background-color: #00bfff;selection-color: cyan;"
+                                     "selection-background-color: black;");
+    ui->lineEdit_log->setStyleSheet("color: blue; background-color: #ff00ff;selection-color: cyan;"
+                                        "selection-background-color: black;");
+    ui->lineEdit_email->setStyleSheet("color: blue; background-color: #00fa9a;selection-color: cyan;"
+                                      "selection-background-color: black;");
+    ui->pushButton_ok->setStyleSheet("color: blue; background-color: #da70d6;selection-color: blue;"
+                                     "selection-background-color: black;");
+    ui->pushButton_cancel->setStyleSheet("color: blue; background-color: #da70d6;selection-color: blue;"
+                                         "selection-background-color: black;");
+    ui->pushButton_reg->setStyleSheet("color: blue; background-color: #da70d6;selection-color: blue;"
+                                      "selection-background-color: black;");
+
     ui->lineEdit_email->setVisible(false);
     ui->pushButton_cancel->setVisible(false);
     //Client::getInstance();
@@ -54,6 +70,8 @@ void FormAuth::check_auth()
                 else if (email=="")
                 {
                     QMessageBox temp;
+                    temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                                       "selection-background-color: black;");
                     temp.setText("Пожалуйста, укажите ваш email");
                     temp.exec();
                     g = false;
@@ -62,6 +80,8 @@ void FormAuth::check_auth()
                 else
                 {
                     QMessageBox temp;
+                    temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                                       "selection-background-color: black;");
                     temp.setText("Данный пользователь уже зарегистрирован");
                     temp.exec();
                     g = false;
@@ -70,6 +90,8 @@ void FormAuth::check_auth()
         else
         {
             QMessageBox temp;
+            temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                               "selection-background-color: black;");
             temp.setText("Длина пароля должна быть больше 4 символов и не превышать 20");
             temp.exec();
             g = false;
@@ -86,6 +108,8 @@ void FormAuth::check_auth()
         else{
                     g=false;
                     QMessageBox temp;
+                    temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                                       "selection-background-color: black;");
                     temp.setText("Неправильный логин или пароль");
                     temp.exec();
         }

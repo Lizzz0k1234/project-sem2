@@ -61,12 +61,16 @@ bool chek_answer(QString answer, QString input_for_task, int task_number)
     if (res)
     {
         QMessageBox temp;
+        temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                           "selection-background-color: black;");
         temp.setText("Правильно!!!");
         temp.exec();
         tmp="+";
     }
     else {
         QMessageBox temp;
+        temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                           "selection-background-color: black;");
         temp.setText("Неправильно!!!       Правильный ответ: "+a+"       Ваш ответ: "+answer);
         temp.exec();
         tmp="-";

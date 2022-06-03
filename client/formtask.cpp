@@ -6,6 +6,13 @@ FormTask::FormTask(QWidget *parent) :
     ui(new Ui::FormTask)
 {
     ui->setupUi(this);
+    this->setStyleSheet("background: #9370db");
+    ui->textBrowser_task->setStyleSheet("color: blue; background-color: #87cefa; selection-color: cyan;"
+                                        "selection-background-color: black;");
+    ui->lineEdit_answer->setStyleSheet("color: blue; background-color: #90ee90; selection-color: blue;"
+                                       "selection-background-color: black;");
+    ui->pushButton_send->setStyleSheet("color: blue; background-color: #da70d6;selection-color: blue;"
+                                       "selection-background-color: black;");
 }
 
 FormTask::~FormTask()

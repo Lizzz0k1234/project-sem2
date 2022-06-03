@@ -5,6 +5,18 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setStyleSheet("background: #9370db");
+    ui->pushButton_task1->setStyleSheet("color: blue; background-color: #7fffd4");
+    ui->pushButton_task2->setStyleSheet("color: blue; background-color: #7fffd4");
+    ui->pushButton_task3->setStyleSheet("color: blue; background-color: #7fffd4");
+    ui->pushButton_stat->setStyleSheet("color: blue; background-color: #00ffff");
+    ui->pushButton_exit->setStyleSheet("color: blue; background-color: #da70d6");
+    ui->menuMenu->setStyleSheet("color: blue; background-color: #7fffd4; selection-color: cyan;"
+                                "selection-background-color: black;");
+    ui->menuAbout->setStyleSheet("color: blue; background-color: #7fffd4; selection-color: cyan;"
+                                 "selection-background-color: black;");
+    ui->menubar->setStyleSheet("color: blue; background-color: #90ee90; selection-color: blue;"
+                               "selection-background-color: black;");
     Client::getInstance();
     ui_auth = new FormAuth;
     ui_task = new FormTask;
@@ -75,6 +87,8 @@ void MainWindow::on_pushButton_stat_clicked()
 {
     QString log = ui -> label->text();
     QMessageBox temp;
+    temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                       "selection-background-color: black;");
     temp.setText("Общее количество баллов: " + look_stat(log) + "   Баллы за 1 задание: " + look_stat1(log) + "   Баллы за 2 задание: " + look_stat2(log) + "   Баллы за 3 задание: " + look_stat3(log) );
     temp.exec();
 
@@ -84,6 +98,8 @@ void MainWindow::on_pushButton_stat_clicked()
 void MainWindow::on_actionOur_project_triggered()
 {
     QMessageBox temp;
+    temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                       "selection-background-color: black;");
     temp.setText("Программа для решения задач по дискретной математике");
     temp.exec();
 }
@@ -98,6 +114,8 @@ void MainWindow::on_actionExit_triggered()
 void MainWindow::on_actionDevelopers_triggered()
 {
     QMessageBox temp;
+    temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                       "selection-background-color: black;");
     temp.setText("Дьяконов Павел    Войтович Владислав    Кузьмич Елизавета");
     temp.exec();
 }
