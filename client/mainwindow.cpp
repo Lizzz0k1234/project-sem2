@@ -106,6 +106,15 @@ void MainWindow::on_pushButton_exit_clicked()
 {
     QString log = ui -> label->text();
     del_status(log);
+    QString i="До свидания";
+    QTextToSpeech *speech;
+    speech=new QTextToSpeech;
+    speech->say(i);
+    QMessageBox temp;
+    temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                       "selection-background-color: black;");
+    temp.setText("До свидания");
+    temp.exec();
     close();
 }
 
