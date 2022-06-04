@@ -2,6 +2,7 @@
 #include "formauth.h"
 #include <QWidget>
 #include <QMessageBox>
+#include <QtTextToSpeech/QTextToSpeech>
 QString auth(QString log, QString pass)
 {
     QString res ="auth&"+log+"&"+pass;
@@ -64,6 +65,10 @@ bool chek_answer(QString answer, QString input_for_task, int task_number)
         temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
                            "selection-background-color: black;");
         temp.setText("Правильно!!!");
+        QString i="Поздравляю";
+        QTextToSpeech *speech;
+        speech=new QTextToSpeech;
+        speech->say(i);
         temp.exec();
         tmp="+";
     }
@@ -72,6 +77,10 @@ bool chek_answer(QString answer, QString input_for_task, int task_number)
         temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
                            "selection-background-color: black;");
         temp.setText("Неправильно!!!       Правильный ответ: "+a+"       Ваш ответ: "+answer);
+        QString i="Не расстраивайтесь, всё получится";
+        QTextToSpeech *speech;
+        speech=new QTextToSpeech;
+        speech->say(i);
         temp.exec();
         tmp="-";
     }

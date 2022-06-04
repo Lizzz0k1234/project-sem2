@@ -2,13 +2,18 @@
 #include "ui_formauth.h"
 #include"client.h"
 #include <QMessageBox>
+#include <QtTextToSpeech/QTextToSpeech>
+#include <QtMultimedia/QMediaPlayer>
 FormAuth::FormAuth(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormAuth)
 {
     ui->setupUi(this);
     this->setStyleSheet("background: #9370db");
-
+    /*QString i="Hello";
+    QTextToSpeech *speech;
+    speech=new QTextToSpeech;
+    speech->say(i);*/
 
     ui->lineEdit_pass->setStyleSheet("color: blue; background-color: #00bfff;selection-color: cyan;"
                                      "selection-background-color: black;");
@@ -39,6 +44,10 @@ void FormAuth::on_pushButton_reg_clicked()
     ui->lineEdit_email->setVisible(true);
     ui->pushButton_cancel->setVisible(true);
     ui->pushButton_reg->setVisible(false);
+    QString i="Зарегистрируйтесь пожалуйста";
+    QTextToSpeech *speech;
+    speech=new QTextToSpeech;
+    speech->say(i);
 }
 
 
@@ -135,6 +144,8 @@ void FormAuth::on_pushButton_ok_clicked()
         else
         {
             QMessageBox temp;
+            temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                               "selection-background-color: black;");
             temp.setText("Пожалуйста, заполните все поля");
             temp.exec();
         }
@@ -142,6 +153,8 @@ void FormAuth::on_pushButton_ok_clicked()
     else
     {
         QMessageBox temp;
+        temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
+                           "selection-background-color: black;");
         temp.setText("Пожалуйста, заполните все поля");
         temp.exec();
     }

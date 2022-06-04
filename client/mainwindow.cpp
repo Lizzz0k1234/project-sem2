@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QtTextToSpeech/QTextToSpeech>
+#include <QtMultimedia/QMediaPlayer>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -21,6 +23,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui_auth = new FormAuth;
     ui_task = new FormTask;
     ui_auth->show();
+    QString i="Здравствуйте, введите пожалуйста логин и пароль";
+    QTextToSpeech *speech;
+    speech=new QTextToSpeech;
+    //QUrl ur("https://audio.mp3set.info/play/9446242.mp3");
+    QUrl ur("https://audio.mp3set.info/play/10563245.mp3");
+    QMediaPlayer* player;
+    player=new QMediaPlayer;
+    player->setMedia(ur);
+    player->setVolume(60);
+    player->play();
+    speech->say(i);
+
     connect(ui_auth, &FormAuth::logged_in, this, &MainWindow::slot_show);
 }
 
@@ -34,6 +48,7 @@ MainWindow::~MainWindow()
 void MainWindow::slot_show(QString log)
 {
     ui -> label -> setText(log);
+    ui->label->setStyleSheet("color: cyan");
     show();
 
 }
@@ -45,18 +60,30 @@ void MainWindow::on_pushButton_task1_clicked()
 {
     ui_task -> set_task_number(1);
     ui_task ->show();
+    QString i="Решите задание 1";
+    QTextToSpeech *speech;
+    speech=new QTextToSpeech;
+    speech->say(i);
 }
 
 void MainWindow::on_pushButton_task2_clicked()
 {
     ui_task -> set_task_number(2);
     ui_task ->show();
+    QString i="Решите задание 2";
+    QTextToSpeech *speech;
+    speech=new QTextToSpeech;
+    speech->say(i);
 }
 
 void MainWindow::on_pushButton_task3_clicked()
 {
     ui_task -> set_task_number(3);
     ui_task ->show();
+    QString i="Решите задание 3";
+    QTextToSpeech *speech;
+    speech=new QTextToSpeech;
+    speech->say(i);
 }
 
 
@@ -101,6 +128,10 @@ void MainWindow::on_actionOur_project_triggered()
     temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
                        "selection-background-color: black;");
     temp.setText("Программа для решения задач по дискретной математике");
+    QString i="Программа для решения задач по дискретной математике";
+    QTextToSpeech *speech;
+    speech=new QTextToSpeech;
+    speech->say(i);
     temp.exec();
 }
 
@@ -117,6 +148,10 @@ void MainWindow::on_actionDevelopers_triggered()
     temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
                        "selection-background-color: black;");
     temp.setText("Дьяконов Павел    Войтович Владислав    Кузьмич Елизавета");
+    QString i="Над приложением работали: Дьяконов Павел, Войтович Владислав и Кузьмич Елизавета";
+    QTextToSpeech *speech;
+    speech=new QTextToSpeech;
+    speech->say(i);
     temp.exec();
 }
 
