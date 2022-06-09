@@ -6,4 +6,8 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_solve_tasks.cpp
+SOURCES +=  tst_solve_tasks.cpp \
+    ../client/solver.cpp
+
+HEADERS += \
+    ../client/solver.h

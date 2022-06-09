@@ -1,6 +1,7 @@
 #ifndef FUNCTIONSFORCLIENT_H
 #define FUNCTIONSFORCLIENT_H
 #include "client.h"
+#include "solver.h"
 #include <QString>
 #include <QDebug>
 QString auth(QString log, QString pass);

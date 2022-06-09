@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     QMediaPlayer* player;
     player=new QMediaPlayer;
     player->setMedia(ur);
-    player->setVolume(60);
+    player->setVolume(100);
     player->play();
     speech->say(i);
 

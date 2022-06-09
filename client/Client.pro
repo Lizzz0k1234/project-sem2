@@ -16,14 +16,16 @@ SOURCES += \
     formtask.cpp \
     functionsforclient.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    solver.cpp
 
 HEADERS += \
     client.h \
     formauth.h \
     formtask.h \
     functionsforclient.h \
-    mainwindow.h
+    mainwindow.h \
+    solver.h
 
 FORMS += \
     formauth.ui \
