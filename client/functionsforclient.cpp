@@ -1,8 +1,7 @@
 #include "functionsforclient.h"
 #include "formauth.h"
 #include <QWidget>
-#include <QMessageBox>
-#include <QtTextToSpeech/QTextToSpeech>
+
 QString auth(QString log, QString pass)
 {
     QString res ="auth&"+log+"&"+pass;
@@ -53,35 +52,17 @@ void update_stat(int n, QString upd)
     qDebug()<<res;
     Client::send_to_server(res);
 }
-bool chek_answer(QString answer, QString input_for_task, int task_number)
+bool chek_answer(QString answer, QString ans, int task_number)
 {
     QString tmp="";
-    QString a="";
-    a=solve_task(task_number, input_for_task);
+    QString a=ans;
+    //a=solve_task(task_number, input_for_task);
     bool res = answer==a;
     if (res)
     {
-        QMessageBox temp;
-        temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
-                           "selection-background-color: black;");
-        temp.setText("Правильно!!!");
-        QString i="Поздравляю";
-        QTextToSpeech *speech;
-        speech=new QTextToSpeech;
-        speech->say(i);
-        temp.exec();
         tmp="+";
     }
     else {
-        QMessageBox temp;
-        temp.setStyleSheet("color: #dc143c; background-color: #87cefa; selection-color: ;"
-                           "selection-background-color: black;");
-        temp.setText("Неправильно!!!       Правильный ответ: "+a+"       Ваш ответ: "+answer);
-        QString i="Не расстраивайтесь, всё получится";
-        QTextToSpeech *speech;
-        speech=new QTextToSpeech;
-        speech->say(i);
-        temp.exec();
         tmp="-";
     }
     update_stat(task_number,tmp);

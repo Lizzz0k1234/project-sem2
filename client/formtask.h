@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "functionsforclient.h"
 #include "client.h"
+#include <QMessageBox>
+#include <QtTextToSpeech/QTextToSpeech>
 namespace Ui {
 class FormTask;
 }
