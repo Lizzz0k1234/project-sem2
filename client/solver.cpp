@@ -126,18 +126,22 @@ QString weight(QString rebro)
 
     return "0";
 }
-QString checkCircle(QString rbr, QStringList arcases)
+QString checkCircle(QString rbra, QStringList arcases)
 {
   QString res = "";
-  QStringList carcases={"0,3,5","1,1,4","3,1,2","4,1,3"};
-  //rbr= "7,3,4"
+  QStringList carcases=arcases;//={"0,3,5","1,1,4","3,1,2","4,1,3"};
+  QString rbr = rbra;//= "7,3,4";
   QStringList circle;
   circle.push_back(rbr); //{"7,3,4"}
   //qDebug()<<rbr;
   QString start = rbr.mid(rbr.indexOf(',')+1,rbr.lastIndexOf(',')-rbr.indexOf(',')-1); //start=3
   QString finish = rbr.mid(rbr.lastIndexOf(',')+1,-1); //finish = 4
+  //qDebug()<<start<<finish;
+  if(carcases.length()==0)
+      return "";
   while (start!=finish)
   {
+      qDebug()<<start<<finish;
 
 
   //qDebug()<<rbr.indexOf(',')+1;
@@ -166,9 +170,9 @@ QString checkCircle(QString rbr, QStringList arcases)
           it_elem ++; //*it_elem = "1,1,4" //*it_elem = "3,1,2"
   }
 
-  if(it_elem->indexOf(finish)==it_elem->lastIndexOf(',')+1)
+  if((it_elem->indexOf(finish))==(it_elem->lastIndexOf(',')+1))
   {
-      circle.push_back(it_elem->mid(0,it_elem->indexOf(','))+","+finish+it_elem->mid(it_elem->indexOf(','),it_elem->lastIndexOf(',')-1));
+      circle.push_back(it_elem->mid(0,it_elem->indexOf(','))+","+finish+it_elem->mid(it_elem->indexOf(','),it_elem->lastIndexOf(',')-it_elem->indexOf(',')));
       qDebug()<<circle.back()+"iiii";
       /*circle.push_back(finish);
       circle.push_back(start);*/
@@ -176,7 +180,7 @@ QString checkCircle(QString rbr, QStringList arcases)
   }
   else if(it_elem->indexOf(finish)==it_elem->lastIndexOf(',')-1)
   {
-      circle.push_back(rbr.mid(0,it_elem->indexOf(','))+it_elem->mid(it_elem->indexOf(','),it_elem->lastIndexOf(',')-1)+","+it_elem->mid(it_elem->lastIndexOf(',')+1,-1));
+      circle.push_back(it_elem->mid(0,it_elem->indexOf(','))+it_elem->mid(it_elem->indexOf(','),it_elem->lastIndexOf(',')-1)+","+it_elem->mid(it_elem->lastIndexOf(',')+1,-1));
       /*circle.push_back(start);
 
       circle.push_back(finish);*/
@@ -208,31 +212,39 @@ QString solve_task3(int task_number, QString input_for_task)
     QStringList hords = {};
     QRegExp rx(";");
     all_rebra = input_for_task.split(rx);
-    /*for (int i=0;i<all_rebra.size();i++)
+   /* for (int i=0;i<all_rebra.size();i++)
     {
-        all_rebra[i] = weight(all_rebra[i])+ all_rebra[i];
+        all_rebra[i] = weight(all_rebra[i])+","+ all_rebra[i];
 
     }*/
     //all_rebra.sort();
     QString circle = "";
     QString rebro = "";
 
-    rebro= all_rebra.front();
-    all_rebra.pop_front();
+    //rebro= all_rebra.front();
+    //all_rebra.pop_front();
     //circle = checkCircle(rebro, carcases);
     while (all_rebra.length()>0)
     {
         QString rbr=all_rebra.front();
-        circle = checkCircle(rbr, all_rebra);
+        circle = checkCircle(rbr, carcases);
+
+        if(circle.length()>0)
+        {
+            hords.push_back(rbr);
+            all_cycles.push_back(circle);
+        }
+        else
+        {
+            carcases.push_back(rbr);
+        }
+        all_rebra.pop_front();
     }
-    if(circle.length()>0)
-    {
-        hords.push_back(rebro);
-        all_cycles.push_back(circle);
+    QString res = "";
+
+    foreach (auto elem, hords) {
+        res.append(elem);
+        res.append (";");
     }
-    else
-    {
-        carcases.push_back(rebro);
-    }
-    return circle;
+    return res;
 }
